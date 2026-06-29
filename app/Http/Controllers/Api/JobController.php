@@ -21,11 +21,11 @@ class JobController extends Controller
     }
 
     /**
-     * GET /jobs/{id}
+     * GET /jobs/{uuid}
      */
-    public function show(int $id): JsonResponse
+    public function show(string $uuid): JsonResponse
     {
-        $job = Career::find($id);
+        $job = Career::where('uuid', $uuid)->first();
 
         if (! $job) {
             return response()->json(['error' => 'Job not found'], 404);
@@ -37,7 +37,7 @@ class JobController extends Controller
     private function transformList(Career $j): array
     {
         return [
-            'id'                   => $j->id,
+            'id'                   => $j->uuid,
             'title'                => $j->title,
             'department'           => $j->department,
             'employment_type'      => $j->employment_type,
@@ -51,7 +51,7 @@ class JobController extends Controller
     private function transformDetail(Career $j): array
     {
         return [
-            'id'                      => $j->id,
+            'id'                      => $j->uuid,
             'title'                   => $j->title,
             'status'                  => $j->status,
             'department'              => $j->department,

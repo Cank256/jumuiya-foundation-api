@@ -23,7 +23,7 @@ Route::get('/news', [NewsController::class, 'index']);
 Route::get('/news/{slug}', [NewsController::class, 'show']); // accepts numeric id OR slug
 
 Route::get('/jobs', [JobController::class, 'index']);
-Route::get('/jobs/{id}', [JobController::class, 'show'])->where('id', '[0-9]+');
+Route::get('/jobs/{uuid}', [JobController::class, 'show'])->where('uuid', '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}');
 
 Route::get('/tenders', [TenderController::class, 'index']);
 Route::get('/tenders/{id}', [TenderController::class, 'show'])->where('id', '[0-9]+');

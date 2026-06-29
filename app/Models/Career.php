@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -9,7 +10,15 @@ use Illuminate\Support\Facades\Storage;
 
 class Career extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, HasUuids;
+
+    /**
+     * The column that holds the UUID (not the primary key).
+     */
+    public function uniqueIds(): array
+    {
+        return ['uuid'];
+    }
 
     protected $fillable = [
         'title',
