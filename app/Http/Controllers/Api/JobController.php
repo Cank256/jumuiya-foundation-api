@@ -70,6 +70,7 @@ class JobController extends Controller
             'application_process'     => $j->application_process,
             'disclaimer'              => $j->disclaimer,
             'apply_here'              => $j->apply_here,
+            'application_email'       => $j->application_email,
             'has_document'            => (bool) $j->has_document,
             'document_download_url'   => $j->document_download_url,
             'document_name'           => $j->document_name,

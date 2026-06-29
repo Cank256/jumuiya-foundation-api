@@ -39,6 +39,7 @@ class Career extends Model
         'application_process',
         'disclaimer',
         'apply_here',
+        'application_email',
         'has_document',
         'document_path',
         'document_name',

@@ -108,6 +108,11 @@ class CareerResource extends Resource
                         ->url()
                         ->maxLength(500),
 
+                    Forms\Components\TextInput::make('application_email')
+                        ->label('Application Submission Email')
+                        ->email()
+                        ->maxLength(255),
+
                     Forms\Components\RichEditor::make('disclaimer')
                         ->columnSpanFull(),
                 ]),
