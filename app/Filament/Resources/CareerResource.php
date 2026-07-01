@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\HasResourcePermissions;
 use App\Filament\Resources\CareerResource\Pages;
 use App\Models\Career;
 use Filament\Forms;
@@ -13,6 +14,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class CareerResource extends Resource
 {
+    use HasResourcePermissions;
+
     protected static ?string $model = Career::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
@@ -22,6 +25,11 @@ class CareerResource extends Resource
     protected static ?string $navigationLabel = 'Jobs & Careers';
 
     protected static ?int $navigationSort = 3;
+
+    protected static function viewPermission(): string   { return 'view content'; }
+    protected static function createPermission(): string { return 'create content'; }
+    protected static function editPermission(): string   { return 'edit content'; }
+    protected static function deletePermission(): string { return 'delete content'; }
 
     public static function form(Form $form): Form
     {

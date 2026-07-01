@@ -7,10 +7,11 @@ use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     protected $fillable = [
         'name',
@@ -32,11 +33,10 @@ class User extends Authenticatable implements FilamentUser
     }
 
     /**
-     * Allow all authenticated users to access the admin panel.
-     * For production, add role checks here.
+     * Only users with the 'admin' or 'editor' role can access the panel.
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        return true;
+        return $this->hasAnyRole(['admin', 'editor', 'viewer']);
     }
 }

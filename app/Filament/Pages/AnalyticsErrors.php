@@ -27,6 +27,11 @@ class AnalyticsErrors extends Page implements HasTable
 
     protected static string $view = 'filament.pages.analytics-errors';
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('view analytics') ?? false;
+    }
+
     public static function getNavigationBadge(): ?string
     {
         $count = AnalyticsError::where('occurred_at', '>=', now()->startOfDay())->count();

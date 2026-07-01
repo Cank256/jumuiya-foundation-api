@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\HasResourcePermissions;
 use App\Filament\Resources\NewsArticleResource\Pages;
 use App\Models\NewsArticle;
 use App\Models\User;
@@ -15,6 +16,8 @@ use Illuminate\Support\Str;
 
 class NewsArticleResource extends Resource
 {
+    use HasResourcePermissions;
+
     protected static ?string $model = NewsArticle::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
@@ -24,6 +27,11 @@ class NewsArticleResource extends Resource
     protected static ?string $navigationLabel = 'News & Articles';
 
     protected static ?int $navigationSort = 2;
+
+    protected static function viewPermission(): string   { return 'view content'; }
+    protected static function createPermission(): string { return 'create content'; }
+    protected static function editPermission(): string   { return 'edit content'; }
+    protected static function deletePermission(): string { return 'delete content'; }
 
     public static function form(Form $form): Form
     {

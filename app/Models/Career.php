@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Storage;
 
 class Career extends Model
 {
@@ -61,7 +60,9 @@ class Career extends Model
             return $this->document_path;
         }
 
-        return Storage::disk('public')->url($this->document_path);
+        // Use a dedicated file-serving route to avoid relying on the
+        // storage symlink (unavailable on some shared hosts like Hostinger).
+        return url('/storage-file/' . ltrim($this->document_path, '/'));
     }
 
     public function getFormattedFileSizeAttribute(): ?string

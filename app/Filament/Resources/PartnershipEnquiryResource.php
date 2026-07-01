@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Concerns\HasResourcePermissions;
 use App\Filament\Resources\PartnershipEnquiryResource\Pages;
 use App\Models\PartnershipEnquiry;
 use Filament\Forms;
@@ -12,6 +13,8 @@ use Filament\Tables\Table;
 
 class PartnershipEnquiryResource extends Resource
 {
+    use HasResourcePermissions;
+
     protected static ?string $model = PartnershipEnquiry::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
@@ -21,6 +24,11 @@ class PartnershipEnquiryResource extends Resource
     protected static ?string $navigationLabel = 'Partnership Enquiries';
 
     protected static ?int $navigationSort = 2;
+
+    protected static function viewPermission(): string   { return 'view messages'; }
+    protected static function createPermission(): string { return 'manage messages'; }
+    protected static function editPermission(): string   { return 'manage messages'; }
+    protected static function deletePermission(): string { return 'manage messages'; }
 
     public static function getNavigationBadge(): ?string
     {

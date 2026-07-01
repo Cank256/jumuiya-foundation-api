@@ -30,6 +30,11 @@ class AnalyticsDashboard extends Page implements HasTable
 
     protected static string $view = 'filament.pages.analytics-dashboard';
 
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->can('view analytics') ?? false;
+    }
+
     public function getHeaderWidgets(): array
     {
         return [
